@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My To-Do App</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header-top">
+      <h1>📝 My To-Do List</h1>
+      <button id="theme-toggle" class="theme-toggle" title="Toggle theme" aria-label="Toggle dark mode">
+        🌙
+      </button>
+    </div>
+
+    <!-- Login section -->
+    <div id="login-section">
+      <p>Sign in to save your tasks:</p>
+      <button id="login-btn">Sign in with Google</button>
+    </div>
+
+    <!-- App section -->
+    <div id="app-section" style="display: none;">
+      <div class="user-info">
+        <img id="user-photo" alt="user" />
+        <div class="user-details">
+          <span id="greeting" class="greeting"></span>
+          <span id="user-name"></span>
+        </div>
+        <button id="logout-btn">Logout</button>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-section">
+        <div class="progress-info">
+          <span id="task-count" class="task-count"></span>
+          <span id="progress-text" class="progress-text"></span>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- 📊 STATISTICS DASHBOARD -->
+      <div class="stats-section">
+        <button id="stats-toggle" class="stats-toggle" aria-expanded="false">
+          <span class="stats-toggle-icon">📊</span>
+          <span>Show Statistics</span>
+          <span class="stats-toggle-arrow">▼</span>
+        </button>
+
+        <div id="stats-content" class="stats-content" style="display: none;">
+          <!-- Summary cards -->
+          <div class="summary-cards">
+            <div class="summary-card">
+              <div class="summary-value" id="stat-total">0</div>
+              <div class="summary-label">Total</div>
+            </div>
+            <div class="summary-card summary-card-green">
+              <div class="summary-value" id="stat-completed">0</div>
+              <div class="summary-label">Completed</div>
+            </div>
+            <div class="summary-card summary-card-red">
+              <div class="summary-value" id="stat-overdue">0</div>
+              <div class="summary-label">Overdue</div>
+            </div>
+            <div class="summary-card summary-card-orange">
+              <div class="summary-value" id="stat-streak">0</div>
+              <div class="summary-label">🔥 Streak</div>
+            </div>
+          </div>
+
+          <!-- Charts -->
+          <div class="charts-grid">
+            <div class="chart-card">
+              <h3 class="chart-title">Last 7 Days</h3>
+              <div class="chart-wrapper">
+                <canvas id="weekChart"></canvas>
+              </div>
+            </div>
+            <div class="chart-card">
+              <h3 class="chart-title">By Priority</h3>
+              <div class="chart-wrapper">
+                <canvas id="priorityChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-task">
+        <input id="task-input" type="text" placeholder="Add a new task..." />
+        <select id="priority-input">
+          <option value="low">🟢 Low</option>
+          <option value="medium" selected>🟡 Medium</option>
+          <option value="high">🔴 High</option>
+        </select>
+        <input id="due-date-input" type="date" />
+        <button id="add-btn">Add</button>
+      </div>
+
+      <!-- Search + Filters -->
+      <div class="toolbar">
+        <input id="search-input" type="text" placeholder="🔍 Search tasks..." />
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="active">Active</button>
+        <button class="filter-btn" data-filter="completed">Completed</button>
+      </div>
+
+      <ul id="task-list"></ul>
+
+      <div class="footer-actions">
+        <button id="clear-completed-btn">🧹 Clear Completed</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
